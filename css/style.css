@@ -1,0 +1,227 @@
+
+
+
+.map {
+  border-left: 1px solid #fff;
+  position: absolute;
+  ;
+  width: 100.00%;
+  top: 0;
+  bottom: 0;
+}
+
+.mapboxgl-popup-content p,h4 {
+  margin: 0px;
+}
+body { /* colour was #B1CABD */
+  color: #202020;
+  font: 400 15px/22px 'Source Sans Pro', 'Helvetica Neue', Sans-serif;
+  margin: 0;
+  padding: 0;
+  -webkit-font-smoothing: antialiased;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+
+a:hover {
+  color: #101010;
+}
+
+a {
+  color: #CE464D;
+}
+
+* {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+h1 {
+  font-size: 22px;
+  margin: 0;
+  font-weight: 400;
+  line-height: 20px;
+  padding: 20px 2px;
+}
+
+.sidebar {
+  position: absolute;
+  width: 10%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  overflow: hidden;
+  border-right: 1px solid rgba(0, 0, 0, 0.25);
+  background-color: #f7fafd;
+}
+
+.map {
+  position: absolute;
+  left: 10%;
+  width: 90%;
+  top: 0;
+  bottom: 0;
+}
+
+
+.listings {
+  height: 100%;
+  overflow: auto;
+  padding-bottom: 60px;
+}
+
+.listings .item {
+  border-bottom: 1px solid #eee;
+  padding: 10px;
+  text-decoration: none;
+}
+
+.listings .item:last-child { border-bottom: none; }
+
+.listings .item .title {
+  display: left;
+  /*padding-bottom: 8px; */
+  color: #202020;
+  font-weight: 700;
+  font-size: 18px;
+}
+
+.listings .item .title small { font-weight: 400; }
+
+.listings .item.active .title,
+.listings .item .title:hover { color: #CE464D; }
+
+.listings .item.active {
+  background-color: #f8f8f8;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 3px;
+  border-left: 0;
+  background: rgba(0, 0, 0, 0.1);
+}
+
+::-webkit-scrollbar-track {
+  background: none;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #202020;
+  border-radius: 0;
+}
+
+.clearfix { display: block; }
+
+.clearfix::after {
+  content: '.';
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+}
+
+
+
+/* Listing SearchBox  */
+
+
+* {
+  box-sizing: border-box;
+}
+
+#myInput {
+
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
+}
+
+
+/* Listing Style */
+
+
+.sidenav {
+    height: 100%;
+    width: 0%; /*35%;*/
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    background-color: #f7fafd;/*#202020; OR*/
+    overflow-x: hidden;
+    transition: 1.5s;
+/*    padding-top: 60px;*/
+}
+
+.sidenav a {
+    padding: 0px 0px 0px 30px;
+    text-decoration: none;
+    font-size: 15px;
+    color: #818181;
+    display: block;
+    transition: 0.3s;
+}
+
+.sidenav a:hover, .offcanvas a:focus{
+    color: #CE464D;
+}
+
+
+
+.sidenav .closebtn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 50px;
+}
+
+@media screen and (max-height: 450px) {
+  .sidenav {padding-top: 10px;}
+  .sidenav a {font-size: 12px;}
+}
+
+#resultnumber {
+  border-bottom: 1px solid #eee;
+  padding: 0px 10px 10px 20px;
+  text-decoration: none;
+}
+
+#filter-container {
+    bottom: 0;
+    position: fixed;
+    z-index: 1;
+    padding: 10px 10px 5px 50px;
+    background-color: rgba(255, 255, 255, 0.75);
+    margin: 0px 25px 5px 130px;
+    transition: 1.5s;
+}
+
+.menu-ui a {
+    font-family: "Overpass", sans-serif;
+    font-size: 13px;
+    background: #969696;
+    text-decoration: none;
+    padding: 5px 10px;
+    color: #fff;
+    margin: 0 2.5px 5px 2.5px;
+    border-radius: 3px;
+    display: inline-block;
+}
+
+.menu-ui a.active  {
+font:bolder;
+background:#CE464D;
+color:#202020;
+}
