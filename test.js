@@ -4545,21 +4545,45 @@ console.log(places.features);
 buildLocationList(places.features,0);
 });
 
+
 $('.menu-ui a').on('click', function() {
   // For each filter link, get the 'data-filter' attribute value.
   var filter = $(this).data('filter');
   console.log('current filter: ',filter)
-  $(this).addClass('active').siblings().removeClass('active');
-  map.setFilter('locations', ['==', filter, 'TRUE']);
+
   if(filter == 'all'){
+    $(this).addClass('active').siblings().removeClass('active');
     map.setFilter('locations');
     buildLocationList(places.features,0);
   }
   else {
-//  else{
-//  map.setFilter('locations', ['==', filter, 'TRUE']);
-//}
+    $(this).addClass('active').siblings().removeClass('active');
+    usedFilters = map.getFilter('locations');
+    // usedFilters looks like:
+    // ["all", ["==", "Language_English", "TRUE"],["==", "Language_Spanish", "TRUE"]]
+    // OR ["==", "Language_English", "TRUE"]
+    if(usedFilters[0]=="all"){ //then we can just append usedFilters
 
+
+      //document.querySelectorAll('.menu-ui .active')["0"].dataset.filter
+      // "Language_Arabic"
+      //
+    }
+    else{ // we have to construct the more complex syntax bc filter is just ["==", "X", "TRUE"]
+        newFilter = ["all",usedFilters,["==",filter,"TRUE"]];
+        map.setFilter(newFilter);
+
+    }
+
+
+    map.setFilter('locations', ['==', filter, 'TRUE']);
+
+//source of following two lines of code: https://github.com/mapbox/mapbox-gl-js/issues/2323
+//var new_Filter = ["all",["==", 'damage', 0],[">=", 'senior_population', 20]];
+//map.setFilter('terrain-data-layer', new_Filter);
+
+
+//below is just to regenerate the list of locations
   var new_locs = [];
   var x = places.features;
   var hi = x.forEach(function(elem) {
