@@ -4517,7 +4517,7 @@ var filterInput = document.getElementById('filter-input');
 
 
 map.on('load', function(e) {
-// Add the data to your map as a layer
+
 map.addSource('places', {
     type: 'geojson',
     data: places//"./markers.geojson"//places
@@ -4545,38 +4545,48 @@ console.log(places.features);
 buildLocationList(places.features,0);
 });
 
-
+var newFilters= [];
 $('.menu-ui a').on('click', function() {
   // For each filter link, get the 'data-filter' attribute value.
   var filter = $(this).data('filter');
-  console.log('current filter: ',filter)
+  console.log('current filter: ',filter);
 
   if(filter == 'all'){
-    $(this).addClass('active').siblings().removeClass('active');
-    map.setFilter('locations');
+    $(this).addClass('active').siblings().removeClass('active'); //removes active menu-ui items
+    map.setFilter('locations'); // resets the map
     buildLocationList(places.features,0);
   }
   else {
     $(this).addClass('active').siblings().removeClass('active');
-    usedFilters = map.getFilter('locations');
+    usedFilters = map.getFilter('locations'); //gets filters currently in use
     // usedFilters looks like:
     // ["all", ["==", "Language_English", "TRUE"],["==", "Language_Spanish", "TRUE"]]
     // OR ["==", "Language_English", "TRUE"]
     if(usedFilters[0]=="all"){ //then we can just append usedFilters
+      //check if filter is already added?
+      strFilters = usedFilters.toString();
+      if(strFilters.includes(filter)){  // assume we are trying to remove this filter!!!
+        $(this).removeClass("active");
+        newFilters = ["all"];
+        //for each elem in usedFilters add if its not the one selected
 
-
+      }
+      else { // we want to add this filter
+        $(this).addClass('active');
+        newFilters = usedFilters;
+        newFilters.push(["==",filter,"TRUE"])
+      }
       //document.querySelectorAll('.menu-ui .active')["0"].dataset.filter
       // "Language_Arabic"
       //
     }
     else{ // we have to construct the more complex syntax bc filter is just ["==", "X", "TRUE"]
         newFilter = ["all",usedFilters,["==",filter,"TRUE"]];
-        map.setFilter(newFilter);
 
     }
+      map.setFilter(newFilter);
 
-
-    map.setFilter('locations', ['==', filter, 'TRUE']);
+    //map.setFilter('locations', ['==', filter, 'TRUE']);
 
 //source of following two lines of code: https://github.com/mapbox/mapbox-gl-js/issues/2323
 //var new_Filter = ["all",["==", 'damage', 0],[">=", 'senior_population', 20]];
@@ -4596,7 +4606,7 @@ $('.menu-ui a').on('click', function() {
   document.getElementById('resultnumber').innerHTML = '';
   console.log(new_locs);
   buildLocationList(new_locs,1);
-}
+} //end of 1st else
 });
 
 
