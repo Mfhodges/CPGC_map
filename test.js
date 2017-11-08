@@ -4753,6 +4753,7 @@ function closeNav() {
     document.getElementById('filter-container').style.marginLeft = "130px";
 }
 
+openNav();
 $( ".mapboxgl-missing-css" ).remove();
 $(".mapboxgl-ctrl-geocoder.mapboxgl-ctrl").remove();
 $(".mapboxgl-ctrl-logo").remove();
