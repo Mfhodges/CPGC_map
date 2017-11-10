@@ -12,9 +12,10 @@ container: 'map',
 // style URL
 style: 'mapbox://styles/mapbox/streets-v10',
 // initial position in [lon, lat] format
-center: [-77.034084, 30.909671],
+center: [-28.784452, 3.292716],
+
 // initial zoom
-zoom: 3
+zoom: 1
 });
 
 //  Enables user to be taken to a certain geo-location
