@@ -4605,6 +4605,9 @@ for ( var n in popupinfo) {
     if ( popupinfo[n] == "TRUE") { found = found.concat("<p>"+n.replace(/_/gi,' ')+"</p>"); }
 
 }
+if (feature.properties['Local Volunteering (spring semester)'] != ''){
+  found.concat("<p>"+feature.properties['Local Volunteering (spring semester)']+"</p>");
+}
 //console.log(found);
 // I could add the html tags here or i could do it when I generate the array found
 //var properties = [];
