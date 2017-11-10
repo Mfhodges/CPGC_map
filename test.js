@@ -4723,3 +4723,6 @@ function closeNav() {
 $( ".mapboxgl-missing-css" ).remove();
 $(".mapboxgl-ctrl-geocoder.mapboxgl-ctrl").remove();
 $(".mapboxgl-ctrl-logo").remove();
+window.onload = function () {
+  openNav();
+};
