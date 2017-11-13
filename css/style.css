@@ -10,6 +10,9 @@
   bottom: 0;
 }
 
+.mapboxgl-popup-content {
+  max-width: 300px;
+}
 .mapboxgl-popup-content p,h4 {
   margin: 0px;
 }
