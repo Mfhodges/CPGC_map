@@ -1,9 +1,4 @@
 
-
-
-
-
-
 mapboxgl.accessToken = 'pk.eyJ1IjoidGF0ZXJ0b3QiLCJhIjoiY2o1bGVnam9mMnNiejMybzZ5aDA0dmNmbiJ9.YHaAlOi4U2iI6hdIhAi-Lg';
 // This adds the map to your page
 var map = new mapboxgl.Map({
@@ -23,9 +18,6 @@ map.addControl(new MapboxGeocoder({
 accessToken: mapboxgl.accessToken
 }));
 
-
-
-
 // Enables user to zoom in/zoom out/rotate map
 map.addControl(new mapboxgl.NavigationControl());
 
@@ -35,13 +27,8 @@ map.addControl(new mapboxgl.FullscreenControl());
 var mydata = JSON.parse(data);
 var places = mydata[0];
 
-
-
-
-
 map.on('load', function(e) {
 // Add the data to your map as a layer
-
 
 map.addSource('places', {
     type: 'geojson',
@@ -64,23 +51,35 @@ layout: {
 },
 });
 
-document.getElementById('listings').innerHTML = '';
-document.getElementById('resultnumber').innerHTML= '';
 console.log(places.features);
 buildLocationList(places.features,0);
 });
+
+
+
+// to find the layers in use do:
+// map.getStyle().layers
+// some are nice because they give city, river, etc. info
+// however some are not really useful .
+// for now i will leave them but I'll remove the ability to
+
 
   //////////////////////////////////////////////////
  ////////// Map Filtering Done Here ///////////////
 //////////////////////////////////////////////////
 $('.menu-ui a').on('click', function() {
+  //closetabs();
+
   // For each filter link, get the 'data-filter' attribute value.
   var filter = $(this).data('filter');
   console.log('current filter: ',filter)
+  closetabs();
+
   $(this).addClass('active').siblings().removeClass('active');
   map.setFilter('locations', ['==', filter, 'TRUE']);
   if(filter == 'all'){
     map.setFilter('locations');
+    //document.getElementById('listings').innerHTML = '';
     buildLocationList(places.features,0);
   }
   else {
@@ -90,16 +89,16 @@ $('.menu-ui a').on('click', function() {
     var hi = x.forEach(function(elem) {
     if(elem.properties[filter] =="TRUE"){
       new_locs.push(elem)
-    }
-  });
+      }
+    });
 
   // clears the sidebar //
-  document.getElementById('listings').innerHTML = '';
-  document.getElementById('resultnumber').innerHTML = '';
+//  document.getElementById('listings').innerHTML = '';
+//  document.getElementById('resultnumber').innerHTML = '';
   //console.log(new_locs);
   //populates sidebar
   buildLocationList(new_locs,1);
-  }
+}
 });
 
   //////////////////////////////////////////////////////
@@ -107,7 +106,7 @@ $('.menu-ui a').on('click', function() {
 //////////////////////////////////////////////////////
 
 map.on('click', function(e) {
-  var features = map.queryRenderedFeatures(e.point ); // gets point clicked on
+  var features = map.queryRenderedFeatures(e.point, { layers: ['locations'] } ); // gets point clicked on
   if (!features.length) {
     return;
   }
@@ -136,6 +135,7 @@ map.on('click', function(e) {
       "<h4>Properties</h4>"+found+additionalInfo)
     .setLngLat(feature.geometry.coordinates)
     .addTo(map);
+
 });
 
 
@@ -144,7 +144,11 @@ map.on('click', function(e) {
 ///////////////////////////////////////////////////////
 
 function buildLocationList(data,val) {
-  // Iterate through the list of places
+  // clears the sidebar //
+  document.getElementById('listings').innerHTML = '';
+  document.getElementById('resultnumber').innerHTML = '';
+
+  // Iterate through the list of places //
   var res = data.length
   var numres = document.getElementById('resultnumber');
   numres.innerHTML = "<h2>Results: " + res.toString() + "</h2>" ;
@@ -173,12 +177,10 @@ function buildLocationList(data,val) {
       var clickedListing = data[this.dataPosition];
       // 1. Fly to the point associated with the clicked link
       flyToPlace(clickedListing);
-      // 2. Close all other popups and display popup for clicked store
-      var activeItem = document.getElementsByClassName('item active');
-      if (activeItem[0]) {
-        activeItem[0].classList.remove('active');
-      }
-    this.parentNode.classList.add('active');
+      // 2. Close all other popups and display popup for clicked source
+      closetabs();
+      // display popup for clicked sourec
+      this.parentNode.classList.add('active');
     })
     // Create a new div with the class 'details' for each location
     // and fill it with the email adress
@@ -194,6 +196,16 @@ function buildLocationList(data,val) {
 
 
 
+function closetabs(){
+  //  Close all other popups //
+  var activeItem = document.getElementsByClassName('item active');
+  if (activeItem[0]) {
+    console.log(activeItem[0])
+    activeItem[0].classList.remove('active');
+  }
+}
+
+
 function flyToPlace(currentFeature) {
   map.flyTo({
     center: currentFeature.geometry.coordinates,
@@ -202,8 +214,8 @@ function flyToPlace(currentFeature) {
 }
 
   //////////////////////////////////////////////////////
- //////////   Add an event listener for   /////////////
-////////// when a user clicks on the map /////////////
+ //////////   Add an event listener for       /////////
+////////// when a user clicks on the sidebar /////////
 /////////////////////////////////////////////////////
 map.on('click', function(e) {
   // Query all the rendered points in the view
@@ -215,6 +227,7 @@ map.on('click', function(e) {
     //flyToStore(clickedPoint);
     // 2. Close all other popups and display popup for clicked store
     var activeItem = document.getElementsByClassName('item active');
+    console.log("actives",activeItem)
     if (activeItem[0]) {
       activeItem[0].classList.remove('active');
     }
@@ -229,6 +242,7 @@ map.on('click', function(e) {
     // Select the correct list item using the found index and add the active class
     var listing = document.getElementById('listing-' + selectedFeatureIndex);
     listing.classList.add('active');
+    console.log("listing",listing)
   }// end if statement
 });
 

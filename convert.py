@@ -12,11 +12,11 @@ def main(argv):
     try:
         opts, args = getopt.getopt(argv,"hi:o:f:",["ifile=","ofile=","format="])
     except getopt.GetoptError:
-        print 'csv_json.py -i <path to inputfile> -o <path to outputfile> -f <dump/pretty>'
+        print 'convert.py -i <path to inputfile> -o <path to outputfile> -f <dump/pretty>'
         sys.exit(2)
     for opt, arg in opts:
         if opt == '-h':
-            print 'csv_json.py -i <path to inputfile> -o <path to outputfile> -f <dump/pretty>'
+            print 'convert.py -i <path to inputfile> -o <path to outputfile> -f <dump/pretty>'
             sys.exit()
         elif opt in ("-i", "--ifile"):
             input_file = arg
@@ -59,19 +59,19 @@ def read_csv(file, json_file, format):
             lat = row["Latitude"]
             lon = row["Longitude"]
             csv_rows.extend([{"type": "Feature", "geometry": { "type": "Point", "coordinates": [ lon,lat ] },"properties":{title[i]:row[title[i]] for i in range(len(title))}}])
-        print csv_rows[0]
+#        print csv_rows[0]
         write_json(csv_rows, json_file, format)
 
 #Convert csv data into json and write it
 def write_json(data, json_file, format):
     #print data
     with open(json_file, "w") as f:
-        f.write("{'type': 'FeatureCollection','features':")
+        f.write("data ='[{\"type\": \"FeatureCollection\",\"features\":")
         if format == "pretty":
             f.write(json.dumps(data, sort_keys=False, indent=4, separators=(',', ': '),encoding="utf-8",ensure_ascii=False))
         else:
             f.write(json.dumps(data))
-        f.write('}')
+        f.write("}]';")
 
 if __name__ == "__main__":
    main(sys.argv[1:])
