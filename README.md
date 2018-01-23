@@ -9,8 +9,7 @@ currently hosted here: http://ds-web.haverford.edu/cpgc/map.html#
 The file `converter.py` has code to convert a csv file to a json file that the .js can read to make the map.
 
 The script can be run from the command line as follows:
- ``` $ python convert.py -i <path to inputfile> -o <path to outputfile>
- ```
+ `$ python convert.py -i <path to inputfile> -o <path to outputfile>`
 
 The code for this script was largely taken from [here](http://www.idiotinside.com/2015/09/18/csv-json-pretty-print-python/) and was modified to accommodate the geojson structure.
 
