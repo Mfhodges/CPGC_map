@@ -9,13 +9,13 @@ currently hosted here: http://ds-web.haverford.edu/cpgc/map.html#
 The file `converter.py` has code to convert a csv file to a json file that the .js can read to make the map.
 
 The script can be run from the command line as follows:
- ```$ python convert.py -i <path to inputfile> -o <path to outputfile>
-
- ```
+```
+$ python convert.py -i <path_to_inputfile> -o <path_to_outputfile>
+```
 
 The code for this script was largely taken from [here](http://www.idiotinside.com/2015/09/18/csv-json-pretty-print-python/) and was modified to accommodate the geojson structure.
 
-###### GeoJSON Structure
+##### GeoJSON Structure
 Since this map is generated with [Mapbox](https://www.mapbox.com/mapbox-gl-js/api) similar to this [example](https://www.mapbox.com/mapbox-gl-js/example/filter-features-within-map-view/), it requires that the data be stored as a GeoJSON. **GeoJSON** is a format for encoding a variety of geographic data structures.
 Consider the following example:
 
@@ -24,7 +24,8 @@ Consider the following example:
 |Dinagat Islands| 125.6| 10.1 |
 
 Would become the following GeoJSON *Feature* object.
-```{
+```
+{
   "type": "Feature",
   "geometry": {
     "type": "Point",
@@ -49,9 +50,7 @@ Therefore the GeoJSON file should be saved as a consistent file name ( currently
 
 NOTE: it should be clarified if the following is needed in the html header before the js.
 
-```<script type="text/javascript" src="data.json"></script>
-
-```
+`<script type="text/javascript" src="data.json"></script>`
 
 
 
@@ -60,6 +59,5 @@ NOTE: it should be clarified if the following is needed in the html header befor
 [google sheet api](https://developers.google.com/sheets/api/guides/concepts)
  TBA
 
-## Contributors
-
+## Contributors :tada:
 [Maddy Hodges](https://github.com/Mfhodges)
