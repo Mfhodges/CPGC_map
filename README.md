@@ -7,8 +7,9 @@ Currently hosted here: http://ds-web.haverford.edu/cpgc/map.html#
 
 The file `converter.py` has code to convert a csv file to a json file that the .js can read to make the map. It is assumed that this csv file is downloaded from the google sheet that contains all CPGC locations.  The script can be run from the command line as follows:
 ```
-$ python convert.py -i <path_to_inputfile> -o <path_to_outputfile>
+$ python convert.py -i <path_to_inputfile> -o <path_to_outputfile> -f <dump/pretty> '
 ```      
+If no *-f* parameter is given then *dump* will be chosen. Dump should always be used for this project unless one is debugging something in the json structure.   
 The code for this script was largely taken from [here](http://www.idiotinside.com/2015/09/18/csv-json-pretty-print-python/) and was modified to accommodate the GeoJSON structure.
 
 ##### GeoJSON Structure
@@ -48,7 +49,7 @@ Each location becomes a *Feature* object and all of these objects are stored in 
 
 This *FeatureCollection* is stored in the specified json as follows
 ```
-data = '[]';
+data = '[FeatureCollection]';
 ```
 So, in a sense, the geoJSON is being stored as a json object and saved to a json file ( note not a geojson file !)  
 
@@ -64,13 +65,16 @@ In the html header the json file is loaded with `<script type="text/javascript" 
 Since , within the json file, the geoJSON is always stored in the variable *data*, it can be loaded in the .js file with the line: `var mydata = JSON.parse(data);` ( note the omission of the '.json' because this is not data.json but rather the variable *data* that is declared within it. )
 
 
-## Updating the map with google sheets
-[google sheet api](https://developers.google.com/sheets/api/guides/concepts)
+## Updating the map with [Google Sheets API](https://developers.google.com/sheets/api/guides/concepts)
 
-TBA
+I followed this [python tutorial](https://www.twilio.com/blog/2017/02/an-easy-way-to-read-and-write-to-a-google-spreadsheet-in-python.html) and created the script `spreadsheet.py` which pulls from a copy of the spread sheet.
 
-The next steps in this project will be to remove the step of downloading the google sheet as an csv and then running `convert.py` and add to the script so that utilize the google sheet api to pull the csv from the web.
+Currently the script `convert.py` can take 'sheet' as the input file and then pull from the google sheet instead of a local csv. The command is as follows:
 
+```
+$ python convert.py -i 'sheet' -o <path_to_outputfile> -f <dump/pretty> '
+```
+The next steps in this project will be have convert pull from the sheet owned by the CPGC and check that the file created is fully functional.
 
 ## Contributors :tada:
-[Maddy Hodges](https://github.com/Mfhodges)
+:octocat: [Maddy Hodges](https://github.com/Mfhodges)
