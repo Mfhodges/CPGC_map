@@ -9,8 +9,7 @@ currently hosted here: http://ds-web.haverford.edu/cpgc/map.html#
 The file `converter.py` has code to convert a csv file to a json file that the .js can read to make the map.
 
 The script can be run from the command line as follows:
-
- ```$ python convert.py -i <path to inputfile> -o <path to outputfile>
+ ``` $ python convert.py -i <path to inputfile> -o <path to outputfile>
  ```
 
 The code for this script was largely taken from [here](http://www.idiotinside.com/2015/09/18/csv-json-pretty-print-python/) and was modified to accommodate the geojson structure.
@@ -35,7 +34,7 @@ Would become the following GeoJSON *Feature* object.
   }
 }
 ```
-###### ([source](http://geojson.org/))
+###### <right> ([source](http://geojson.org/)) </right>
 Moreover the scripts in this repo assume every location will have the geometry type of *Point*.
 
 Since the map relies on a GeoJSON structure, there are two main assumptions of the csv that is being read - there exists two columns "Latitude" and "Longitude". **Without these features the script will throw an error.**
@@ -61,4 +60,3 @@ NOTE: it should be clarified if the following is needed in the html header befor
 ## Contributors
 
 [Maddy Hodges](https://github.com/Mfhodges)
-
