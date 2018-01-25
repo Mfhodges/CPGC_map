@@ -67,14 +67,16 @@ Since , within the json file, the geoJSON is always stored in the variable *data
 
 ## Updating the map with [Google Sheets API](https://developers.google.com/sheets/api/guides/concepts)
 
-I followed this [python tutorial](https://www.twilio.com/blog/2017/02/an-easy-way-to-read-and-write-to-a-google-spreadsheet-in-python.html) and created the script `spreadsheet.py` which pulls from a copy of the spread sheet.
+I followed this [python tutorial](https://www.twilio.com/blog/2017/02/an-easy-way-to-read-and-write-to-a-google-spreadsheet-in-python.html) and created the script `spreadsheet.py` which pulls from a copy of the spread sheet. Essentially with the use of Google APIs, I have created credentials ( looks an email ) and then gave that email/credential r/w rights on the spreadsheet just as you would give any user access. The one caveat is that since I ( Maddy Hodges ) have created the credential, once I graduate :sob: ,  my Haverford account will be deactivated and with it this credential.  
 
 Currently the script `convert.py` can take 'sheet' as the input file and then pull from the google sheet instead of a local csv. The command is as follows:
 
 ```
 $ python convert.py -i 'sheet' -o <path_to_outputfile> -f <dump/pretty> '
 ```
-The next steps in this project will be have convert pull from the sheet owned by the CPGC and check that the file created is fully functional.
+The next steps in this project will be have *convert.py* pull from the google sheet owned by the CPGC and check that the file created is fully functional.
+
+
 
 ## Contributors :tada:
 :octocat: [Maddy Hodges](https://github.com/Mfhodges)
