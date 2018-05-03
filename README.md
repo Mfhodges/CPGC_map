@@ -74,7 +74,12 @@ Currently the script `convert.py` can take 'sheet' as the input file and then pu
 ```
 $ python convert.py -i 'sheet' -o <path_to_outputfile> -f <dump/pretty> '
 ```
-The next steps in this project will be have *convert.py* pull from the google sheet owned by the CPGC and check that the file created is fully functional.
+e.g.
+```
+$ python convert.py -i 'sheet' -o data.json 
+```
+
+The next steps in this project will be have *convert.py* pull from the google sheet owned by the CPGC and check that the file created is fully .
 
 
 
